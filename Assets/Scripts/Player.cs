@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public KeyCode MoveKey;
+    public KeyCode MoveKey1;
+    public KeyCode MoveKey2;
+
 
     void Update()
     {
-        if(Input.GetKey(MoveKey))
-        transform.position = new Vector3(0, 0, 0);
+        if(Input.GetKeyUp(MoveKey1))
+        transform.position = new Vector3(transform.position.x+2, 1, 0);
+
+        if (Input.GetKeyUp(MoveKey2))
+        transform.position = new Vector3(transform.position.y+0, 1, 2);
     }
 }
