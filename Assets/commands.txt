@@ -1,0 +1,9 @@
+bot.move(10)
+bot.left()
+bot.right()
+bot.jump()
+
+
+
+
+[1] 10
