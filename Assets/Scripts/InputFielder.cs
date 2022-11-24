@@ -6,7 +6,6 @@ public class InputFielder : MonoBehaviour
 {
     public int STEPSIZE = 2;
     public InputField field; // вставь сюда через инспектор
-    //public GameObject Player;
 
     public void SomeMethod()
     {
@@ -20,7 +19,7 @@ public class InputFielder : MonoBehaviour
         {
             case "move":
                 Debug.Log($"Команда перемещения на {value} шагов выполнена");
-                transform.position = new Vector3(transform.position.x + STEPSIZE, transform.position.y, transform.position.z);
+                transform.position = transform.forward * STEPSIZE;//new Vector3(transform.position.x + STEPSIZE, transform.position.y, transform.position.z);
                 break;
 
             case "left":
