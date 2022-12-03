@@ -19,21 +19,17 @@ public class InputFielder : MonoBehaviour
         {
             case "move":
                 Debug.Log($"Команда перемещения на {value} шагов выполнена");
-                transform.position = transform.forward * STEPSIZE;//new Vector3(transform.position.x + STEPSIZE, transform.position.y, transform.position.z);
+                transform.position += (transform.forward * STEPSIZE);
                 break;
 
             case "left":
                 Debug.Log("Команда поворота влево выполнена");
-                transform.Rotate(0.0f, -90.0f, 0.0f);
+                transform.Rotate(Vector3.up, -90f);
                 break;
 
             case "right":
                 Debug.Log("Команда поворота вправо выполнена");
-                transform.Rotate(0.0f, 90.0f, 0.0f);
-                break;
-
-            case "jump":
-                Debug.Log($"Команда прыжка {value} раз выполнена");
+                transform.Rotate(Vector3.up, 90f);
                 break;
         }
     }
