@@ -19,7 +19,10 @@ public class InputFielder : MonoBehaviour
         {
             case "move":
                 Debug.Log($" оманда перемещени€ на {value} шагов выполнена");
-                transform.position += (transform.forward * STEPSIZE);
+                for (int i = 0; i < value; i++)
+                {
+                    transform.position += (transform.forward * STEPSIZE);
+                }
                 break;
 
             case "left":
