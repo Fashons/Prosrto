@@ -7,10 +7,14 @@ public class InputFielder : MonoBehaviour
 {
     public int STEPSIZE = 2;
     public InputField field;
+    public int RotTime = 7500;
 
     private double currentValue = 0.0;
     private double limit = 0.0;
-    private float delay = 0;
+    private double currentValueL = 0.0;
+    private double limitL = 0.0;
+    private double currentValueR = 0.0;
+    private double limitR = 0.0;
 
     private Queue<CommandBlock> queue = new Queue<CommandBlock>();
 
@@ -40,22 +44,18 @@ public class InputFielder : MonoBehaviour
         }
         else
         {
-            while (delay < 2.0f)
-            {
-                delay += Time.deltaTime;
-            }
-
             if (queue.Count > 0)
             {
                 var queuedElement = queue.Dequeue();
                 RunCommand(queuedElement.command, queuedElement.value);
             }
         }
-        if (currentValue < limit)
+        
+        if (currentValueR < limitR)
         {
-            var rotateR = Time.deltaTime * 90f;
+            var rotateR = Time.deltaTime / 90.0f * RotTime;
             transform.Rotate(Vector3.up, rotateR);
-            currentValue += rotateR;
+            currentValueR += rotateR;
         }
         else
         {
@@ -65,11 +65,12 @@ public class InputFielder : MonoBehaviour
                 RunCommand(queuedElement.command, queuedElement.value);
             }
         }
-        if (currentValue < limit)
+
+        if (currentValueL < limitL)
         {
-            var rotateL = Time.deltaTime * -90f;
+            var rotateL = Time.deltaTime / -90.0f * RotTime;
             transform.Rotate(Vector3.up, rotateL);
-            currentValue += rotateL;
+            currentValueL += rotateL;
         }
         else
         {
@@ -98,12 +99,14 @@ public class InputFielder : MonoBehaviour
                 currentValue = 0.0;
                 break;
 
-            case "left":
-                transform.Rotate(Vector3.up, -90f);
+            case "right":
+                limitR = 90.0f;
+                currentValueR = 0.0;
                 break;
 
-            case "right":
-                transform.Rotate(Vector3.up, 90f);
+            case "left":
+                limitL = -90.0f;
+                currentValueL = 0.0;
                 break;
         }
     }
