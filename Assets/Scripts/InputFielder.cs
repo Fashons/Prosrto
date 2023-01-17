@@ -5,19 +5,20 @@ using UnityEngine.UI;
 
 public class InputFielder : MonoBehaviour
 {
-    public int STEPSIZE = 2;
-    public InputField field;
+    public int STEPSIZE = 4;
     public int RotTime = 7500;
+    public InputField field;
 
-    private double currentValue = 0.0;
-    private double limit = 0.0;
-    private double currentValueL = 0.0;
-    private double limitL = 0.0;
-    private double currentValueR = 0.0;
-    private double limitR = 0.0;
+    private static Queue<CommandBlock> queue = new Queue<CommandBlock>();
 
-    private Queue<CommandBlock> queue = new Queue<CommandBlock>();
 
+    internal class CommandBlock
+    {
+        public string command;
+        public int value;
+        public double currentValue = 0.0;
+        public double limit = 0.0;
+    }
 
     public void SomeMethod()
     {
@@ -30,84 +31,82 @@ public class InputFielder : MonoBehaviour
             int value = 0;
             int.TryParse(fullCommand[1].TrimEnd(')'), out value);
 
-            queue.Enqueue(new CommandBlock() { command = command, value = value });
-        } 
+            float limit = 0.0f;
+
+            switch (command)
+            {
+                case "move":
+                    limit = value * STEPSIZE;
+                    break;
+
+                case "right":
+                    limit = 90.0f;
+                    break;
+
+                case "left":
+                    limit = -90.0f;
+                    break;
+
+                default:
+                    break;
+            }
+            queue.Enqueue(new CommandBlock() { command = command, value = value, currentValue = 0.0, limit = limit });
+        }
     }
 
     void Update()
     {
-        if (currentValue < limit)
+        if (queue.Count > 0)
         {
-            var distance = Time.deltaTime * STEPSIZE;
-            transform.Translate(Vector3.forward * distance);
-            currentValue += distance;
-        }
-        else
-        {
-            if (queue.Count > 0)
+            CommandBlock queuedCommand = queue.Peek();
+
+            switch (queuedCommand.command)
             {
-                var queuedElement = queue.Dequeue();
-                RunCommand(queuedElement.command, queuedElement.value);
+                case "move":
+                    if (queuedCommand.currentValue < queuedCommand.limit)
+                    {
+                        var distance = Time.deltaTime * STEPSIZE;
+                        transform.Translate(Vector3.forward * distance);
+                        queuedCommand.currentValue += distance;
+                    }
+                    else
+                    {
+                        Debug.Log("Deque move");
+                        queue.Dequeue();
+                    }
+                    break;
+
+                case "right":
+                    if (queuedCommand.currentValue < queuedCommand.limit)
+                    {
+                        var rotateR = Time.deltaTime / 90.0f * RotTime;
+                        transform.Rotate(Vector3.up, rotateR);
+                        queuedCommand.currentValue += rotateR;
+                    }
+                    else
+                    {
+                        Debug.Log("Deque right");
+                        queue.Dequeue();
+                    }
+                    break;
+
+                case "left":
+                    if (queuedCommand.currentValue < queuedCommand.limit)
+                    {
+                        var rotateR = Time.deltaTime / -90.0f * RotTime;
+                        transform.Rotate(Vector3.up, rotateR);
+                        queuedCommand.currentValue += rotateR;
+                    }
+                    else
+                    {
+                        Debug.Log("Deque left");
+                        queue.Dequeue();
+                    }
+                    break;
+
+                default:
+                    break;
             }
-        }
-        
-        if (currentValueR < limitR)
-        {
-            var rotateR = Time.deltaTime / 90.0f * RotTime;
-            transform.Rotate(Vector3.up, rotateR);
-            currentValueR += rotateR;
-        }
-        else
-        {
-            if (queue.Count > 0)
-            {
-                var queuedElement = queue.Dequeue();
-                RunCommand(queuedElement.command, queuedElement.value);
-            }
-        }
-
-        if (currentValueL < limitL)
-        {
-            var rotateL = Time.deltaTime / -90.0f * RotTime;
-            transform.Rotate(Vector3.up, rotateL);
-            currentValueL += rotateL;
-        }
-        else
-        {
-            if (queue.Count > 0)
-            {
-                var queuedElement = queue.Dequeue();
-                RunCommand(queuedElement.command, queuedElement.value);
-            }
-        }
-    }
-
-
-    internal class CommandBlock
-    {
-        public string command;
-        public int value;
-    }
-    
-
-    private void RunCommand(string command, int value)
-    {
-        switch (command)
-        {
-            case "move":
-                limit = value * STEPSIZE;
-                currentValue = 0.0;
-                break;
-
-            case "right":
-                limitR = 90.0f;
-                currentValueR = 0.0;
-                break;
-
-            case "left":
-                limitL = -90.0f;
-                currentValueL = 0.0;
-                break;
         }
     }
 }

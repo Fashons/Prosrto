@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   STEPSIZE: 4
-  field: {fileID: 1848597666}
   RotTime: 7500
+  field: {fileID: 1848597666}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
