@@ -22,7 +22,7 @@ public class InputFielder : MonoBehaviour
 
     public void SomeMethod()
     {
-        string[] lines = field.text.Split('\n');
+        string[] lines = field.text.Split('\n', System.StringSplitOptions.RemoveEmptyEntries);
 
         foreach (var line in lines)
         {

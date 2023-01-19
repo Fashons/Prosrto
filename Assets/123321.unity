@@ -403,7 +403,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\u0412\u044B\u043F\u043E\u043B\u043D\u0438\u0442\u044C"
 --- !u!222 &736039039
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -447,11 +447,11 @@ RectTransform:
   m_Father: {fileID: 1251447997}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 341, y: -15}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -15}
   m_SizeDelta: {x: 250, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &927137430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,7 +623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.42548567, y: 0.37314978, z: -0.1984072, w: 0.8002224}
-  m_LocalPosition: {x: -14, y: 21.8, z: -19}
+  m_LocalPosition: {x: -14, y: 25.01, z: -22.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1449,7 +1449,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: cmd
+  m_Text: "\u041F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u0430:"
 --- !u!222 &2128425875
 CanvasRenderer:
   m_ObjectHideFlags: 0
