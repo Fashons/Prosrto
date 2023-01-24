@@ -13,7 +13,7 @@ public class WallGameOver : MonoBehaviour
             //очистить очередь и вернуть пылесос в координаты x = ? y = ?
             //то есть обратиться к объекту Player и вызвать в нём функцию ClearQeue()
 
-
+            
             SceneManager.LoadScene("NewScene");
         }
     }
