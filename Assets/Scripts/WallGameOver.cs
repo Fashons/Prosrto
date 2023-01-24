@@ -10,6 +10,10 @@ public class WallGameOver : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            //очистить очередь и вернуть пылесос в координаты x = ? y = ?
+            //то есть обратиться к объекту Player и вызвать в нём функцию ClearQeue()
+
+
             SceneManager.LoadScene("NewScene");
         }
     }

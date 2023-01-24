@@ -20,11 +20,11 @@ public class TextScript : MonoBehaviour
     void TextSvitcher()
     {
         Text = GameObject.Find("TextOnDisplay").GetComponent<Text>();
-        Text.text = "Давай научу тебя играть!";
+        Text.text = "Р”Р°РІР°Р№ РЅР°СѓС‡Сѓ С‚РµР±СЏ РёРіСЂР°С‚СЊ!";
     }
     IEnumerator TextCoroutine()
     {
-        foreach(char abc in text)
+        foreach (char abc in text)
         {
             TextGameObject.text += abc;
             yield return new WaitForSeconds(0.10f);

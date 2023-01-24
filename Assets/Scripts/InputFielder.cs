@@ -11,7 +11,6 @@ public class InputFielder : MonoBehaviour
 
     private static Queue<CommandBlock> queue = new Queue<CommandBlock>();
 
-
     internal class CommandBlock
     {
         public string command;
@@ -52,6 +51,11 @@ public class InputFielder : MonoBehaviour
             }
             queue.Enqueue(new CommandBlock() { command = command, value = value, currentValue = 0.0, limit = limit });
         }
+    }
+
+    public void ClearQueue()
+    {
+        queue.Clear();
     }
 
     void Update()
