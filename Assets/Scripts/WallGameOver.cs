@@ -8,13 +8,11 @@ public class WallGameOver : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.tag == "Player")
+        InputFielder inputFielder;
+        if (collision.gameObject.TryGetComponent<InputFielder>(out inputFielder))
         {
-            //очистить очередь и вернуть пылесос в координаты x = ? y = ?
-            //то есть обратиться к объекту Player и вызвать в нём функцию ClearQeue()
-
-            
-            SceneManager.LoadScene("NewScene");
+            inputFielder.ClearQueue();   
+            SceneManager.LoadScene("123321");
         }
     }
 }

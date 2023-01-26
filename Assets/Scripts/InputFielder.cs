@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InputFielder : MonoBehaviour
 {
-    public int STEPSIZE = 4;
+    public int STEPSIZE = 2;
     public int RotTime = 7500;
     public InputField field;
 
