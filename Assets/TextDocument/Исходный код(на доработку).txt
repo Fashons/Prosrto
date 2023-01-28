@@ -6,32 +6,35 @@ using UnityEngine.UI;
 public class TextScript : MonoBehaviour
 {
     public Text TextGameObject;
-    public Text TextGameObject2;
     private string text;
-    public GameObject TextOnDisplay;
-    public GameObject TextOnDisplay2;
+    private Text Text;
 
     private void Start()
     {
         text = TextGameObject.text;
         TextGameObject.text = "";
         StartCoroutine(TextCoroutine());
-        Invoke("Text2", 3f);
+        Invoke("TextSvitcher", 3f);
+        Invoke("TextClear", 2f);
     }
-    void Text2()
+    void TextSvitcher()
     {
-        TextOnDisplay.SetActive(false);
-        TextOnDisplay2.SetActive(true);
-        text = TextGameObject2.text;
-        TextGameObject2.text = "";
+        Text = GameObject.Find("TextOnDisplay").GetComponent<Text>();
+        Text.text = "Давай научу тебя играть!";
         StartCoroutine(TextCoroutine());
     }
+
+    void TextClear()
+    {
+        TextGameObject.text = "";
+    }
+
     IEnumerator TextCoroutine()
     {
         foreach (char abc in text)
         {
             TextGameObject.text += abc;
-            TextGameObject2.text += abc;
+            Text.text += abc;
             yield return new WaitForSeconds(0.10f);
         }
     }
