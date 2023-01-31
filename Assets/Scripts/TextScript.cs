@@ -6,33 +6,49 @@ using UnityEngine.UI;
 public class TextScript : MonoBehaviour
 {
     public Text TextGameObject;
-    public Text TextGameObject2;
-    private string text;
-    public GameObject TextOnDisplay;
-    public GameObject TextOnDisplay2;
+    private int index = 0;
+    private float prevTime = 0.0f;
+    Queue<string> queue = new Queue<string>();
+    private string Vvod1 = "ѕриветствую!";
+    private string Vvod2 = "ƒавай научу играть";
+    bool брать—ледующий = true;
 
     private void Start()
     {
-        text = TextGameObject.text;
         TextGameObject.text = "";
-        StartCoroutine(TextCoroutine());
-        Invoke("Text2", 3f);
+        queue.Enqueue(Vvod1);
+        queue.Enqueue(Vvod2);
     }
-    void Text2()
+
+    private void FixedUpdate()
     {
-        TextOnDisplay.SetActive(false);
-        TextOnDisplay2.SetActive(true);
-        text = TextGameObject2.text;
-        TextGameObject2.text = "";
-        StartCoroutine(TextCoroutine());
-    }
-    IEnumerator TextCoroutine()
-    {
-        foreach (char abc in text)
+        if (брать—ледующий && queue.Count > 0)
         {
-            TextGameObject.text += abc;
-            TextGameObject2.text += abc;
-            yield return new WaitForSeconds(0.10f);
+            string word = queue.Peek();
+            if (index < word.Length)
+            {
+                prevTime += Time.deltaTime;
+                if (prevTime > 0.1f)
+                {
+                    TextGameObject.text += word[index++];
+
+                    prevTime = 0;
+                }
+            }
+            else
+            {
+                
+                index = 0;
+                queue.Dequeue();
+                брать—ледующий = false;
+            }
+            StartCoroutine(Delay());
         }
+    }
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(5);
+        брать—ледующий = true;
+        TextGameObject.text = "";
     }
 }
