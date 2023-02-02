@@ -8,21 +8,37 @@ public class TextScript : MonoBehaviour
     public Text TextGameObject;
     private int index = 0;
     private float prevTime = 0.0f;
+    private float prevWordsTime = 0.0f; 
     Queue<string> queue = new Queue<string>();
-    private string Vvod1 = "Приветствую!";
+    private string Vvod1 = "Приветствую!!!";
     private string Vvod2 = "Давай научу играть";
-    bool братьСледующий = true;
+    private string Vvod3 = "Смотри у нас есть Игрок которым ты управляешь";
+    private string Vvod4 = "Это поле для комманд, туда ты напишешь команду для управления Игроком";
+    private string Vvod5 = "Всего у нас 3 комадны:";
+    private string Vvod6 = "bot.move(Какое либо число) - эта команда позволяет двигать Игрока вперёд";
+    private string Vvod7 = "bot.right() - эта команда поворачивает Игрока вправо";
+    private string Vvod8 = "bot.left() - эта команда поворачивает Игрока влево";
+    private string Vvod9 = "Вот я тебя и научил основам";
+    private string Vvod10 = "Удачи в игре!";
 
     private void Start()
     {
         TextGameObject.text = "";
         queue.Enqueue(Vvod1);
         queue.Enqueue(Vvod2);
+        queue.Enqueue(Vvod3);
+        queue.Enqueue(Vvod4);
+        queue.Enqueue(Vvod5);
+        queue.Enqueue(Vvod6);
+        queue.Enqueue(Vvod7);
+        queue.Enqueue(Vvod8);
+        queue.Enqueue(Vvod9);
+        queue.Enqueue(Vvod10);
     }
 
     private void FixedUpdate()
     {
-        if (братьСледующий && queue.Count > 0)
+        if (queue.Count > 0)
         {
             string word = queue.Peek();
             if (index < word.Length)
@@ -31,24 +47,20 @@ public class TextScript : MonoBehaviour
                 if (prevTime > 0.1f)
                 {
                     TextGameObject.text += word[index++];
-
                     prevTime = 0;
                 }
             }
             else
             {
-                
-                index = 0;
-                queue.Dequeue();
-                братьСледующий = false;
+                prevWordsTime += Time.deltaTime;
+                if (prevWordsTime > 2.0f)
+                {
+                    index = 0;
+                    TextGameObject.text = "";
+                    prevWordsTime = 0;
+                    queue.Dequeue();
+                }
             }
-            StartCoroutine(Delay());
         }
-    }
-    IEnumerator Delay()
-    {
-        yield return new WaitForSeconds(5);
-        братьСледующий = true;
-        TextGameObject.text = "";
     }
 }
