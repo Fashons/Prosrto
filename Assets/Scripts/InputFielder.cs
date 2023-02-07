@@ -95,11 +95,11 @@ public class InputFielder : MonoBehaviour
                     break;
 
                 case "left":
-                    if (queuedCommand.currentValue < queuedCommand.limit)
+                    if (queuedCommand.currentValue > queuedCommand.limit)
                     {
-                        var rotateR = Time.deltaTime / -90.0f * RotTime;
-                        transform.Rotate(Vector3.up, rotateR);
-                        queuedCommand.currentValue += rotateR;
+                        var rotateL = Time.deltaTime / -90.0f * RotTime;
+                        transform.Rotate(Vector3.up, rotateL);
+                        queuedCommand.currentValue += rotateL;
                     }
                     else
                     {
