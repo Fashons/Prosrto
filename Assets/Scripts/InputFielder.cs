@@ -9,7 +9,7 @@ public class InputFielder : MonoBehaviour
     public int RotTime = 7500;
     public InputField field;
 
-    public TextMesh errorText;
+    public Text errorText;
 
     private static Queue<CommandBlock> queue = new Queue<CommandBlock>();
 
@@ -77,8 +77,9 @@ public class InputFielder : MonoBehaviour
 
     private void ErrorMessage(string errorMessage)
     {
-        errorText.text = errorMessage;
+        //errorText.text = errorMessage;
         errorText.GetComponent<Text>().enabled = true;
+        //FocusType
     }
 
     void Update()
