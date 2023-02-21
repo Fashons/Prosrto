@@ -9,6 +9,8 @@ public class InputFielder : MonoBehaviour
     public int RotTime = 7500;
     public InputField field;
 
+    public TextMesh errorText;
+
     private static Queue<CommandBlock> queue = new Queue<CommandBlock>();
 
     internal class CommandBlock
@@ -25,10 +27,24 @@ public class InputFielder : MonoBehaviour
 
         foreach (var line in lines)
         {
-            string[] fullCommand = line.Split('(');
-            string command = fullCommand[0].Split('.')[1];
+            string command = "";
             int value = 0;
-            int.TryParse(fullCommand[1].TrimEnd(')'), out value);
+
+            try
+            {
+                string[] fullCommand = line.Split('(');
+                command = fullCommand[0].Split('.')[1];
+                if (!int.TryParse(fullCommand[1].TrimEnd(')'), out value))
+                {
+                    ErrorMessage("");
+                    return;
+                }
+            }
+            catch
+            {
+                ErrorMessage("");
+                return;
+            }
 
             float limit = 0.0f;
 
@@ -47,7 +63,8 @@ public class InputFielder : MonoBehaviour
                     break;
 
                 default:
-                    break;
+                    ErrorMessage("");
+                    return;
             }
             queue.Enqueue(new CommandBlock() { command = command, value = value, currentValue = 0.0, limit = limit });
         }
@@ -56,6 +73,12 @@ public class InputFielder : MonoBehaviour
     public void ClearQueue()
     {
         queue.Clear();
+    }
+
+    private void ErrorMessage(string errorMessage)
+    {
+        errorText.text = errorMessage;
+        errorText.GetComponent<Text>().enabled = true;
     }
 
     void Update()
@@ -75,7 +98,6 @@ public class InputFielder : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Deque move");
                         queue.Dequeue();
                     }
                     break;
@@ -89,7 +111,6 @@ public class InputFielder : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Deque right");
                         queue.Dequeue();
                     }
                     break;
@@ -103,7 +124,6 @@ public class InputFielder : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Deque left");
                         queue.Dequeue();
                     }
                     break;
