@@ -34,11 +34,12 @@ public class InputFielder : MonoBehaviour
             {
                 string[] fullCommand = line.Split('(');
                 command = fullCommand[0].Split('.')[1];
-                if (!int.TryParse(fullCommand[1].TrimEnd(')'), out value))
-                {
-                    ErrorMessage("");
-                    return;
-                }
+                if (command == "move")
+                    if (!int.TryParse(fullCommand[1].TrimEnd(')'), out value))
+                    {
+                        ErrorMessage("");
+                        return;
+                    }
             }
             catch
             {
