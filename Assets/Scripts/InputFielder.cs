@@ -9,6 +9,8 @@ public class InputFielder : MonoBehaviour
     public int RotTime = 7500;
     public InputField field;
 
+    private float prevTime = 0.0f;
+
     public Text errorText;
 
     private static Queue<CommandBlock> queue = new Queue<CommandBlock>();
@@ -80,6 +82,7 @@ public class InputFielder : MonoBehaviour
     {
         //errorText.text = errorMessage;
         errorText.GetComponent<Text>().enabled = true;
+        prevTime = 0.0f;
         //FocusType
     }
 
@@ -134,5 +137,9 @@ public class InputFielder : MonoBehaviour
                     break;
             }
         }
+
+        prevTime += Time.deltaTime;
+        if (prevTime >= 3.0f)
+            errorText.GetComponent<Text>().enabled = false;
     }
 }

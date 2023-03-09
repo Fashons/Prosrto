@@ -10,6 +10,8 @@ public class CollectTrashMap : MonoBehaviour
 
     public static float CollectTrash; //Считаем собранные монетки
     private float AllTrashStart; //Считаем все монетки находящиеся на уровне
+    public GameObject Palka; //Привязываем слеш
+
 
     void Awake()
     {
@@ -17,6 +19,11 @@ public class CollectTrashMap : MonoBehaviour
         CollectTrash = 0;
         SetAllCollectableTrash();
         CurrentCollectedTrash();
+    }
+
+    private void Start()
+    {
+        Palka.SetActive(true);
     }
 
     void OnTriggerEnter(Collider other)

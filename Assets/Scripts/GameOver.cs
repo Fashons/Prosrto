@@ -11,8 +11,13 @@ public class GameOver : MonoBehaviour
         InputFielder inputFielder;
         if (collision.gameObject.TryGetComponent<InputFielder>(out inputFielder))
         {
+            var programText = inputFielder.field.text;
+
             inputFielder.ClearQueue();   
             SceneManager.LoadScene("1Level");
+
+            Debug.Log("Nen");
+            inputFielder.field.text = programText;
         }
     }
 }
