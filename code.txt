@@ -1,0 +1,2 @@
+bot.left()
+bot.move(2)
