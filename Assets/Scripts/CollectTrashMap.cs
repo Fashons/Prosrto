@@ -12,6 +12,8 @@ public class CollectTrashMap : MonoBehaviour
     private float AllTrashStart; //Считаем все монетки находящиеся на уровне
     public GameObject Palka; //Привязываем слеш
 
+    [SerializeField] private AudioSource PickUpSound;
+
 
     void Awake()
     {
@@ -32,6 +34,7 @@ public class CollectTrashMap : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             CollectTrash = CollectTrash + 1;
+            PickUpSound.Play();
             SetAllCollectableTrash();
             CurrentCollectedTrash();
         }

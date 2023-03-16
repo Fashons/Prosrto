@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
     public GameObject Player;
-    //string programText = "";
+    string programText = "";
+
+    [SerializeField] private AudioSource GameOverSound;
 
 
     private void OnTriggerEnter(Collider collision)
@@ -14,22 +16,15 @@ public class GameOver : MonoBehaviour
         InputFielder inputFielder;
         if (collision.gameObject.TryGetComponent<InputFielder>(out inputFielder))
         {
-            //programText = inputFielder.field.text;
+            programText = inputFielder.field.text;
+            CodeSaver.Code = programText;
 
             inputFielder.ClearQueue();
             SceneManager.LoadScene("1Level");
 
-            //Debug.Log("Nen");
+            inputFielder.field.text = CodeSaver.Code;
 
-            //StartCoroutine("RestoreCode");
-            
+            //GameOverSound.Play();
         }
-
-
-        /*IEnumerator RestoreCode()
-        {
-            yield return new WaitForSeconds(5);
-            inputFielder.field.text = programText;
-        }*/
     }
 }

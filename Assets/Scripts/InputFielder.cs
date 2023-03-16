@@ -86,6 +86,13 @@ public class InputFielder : MonoBehaviour
         //FocusType
     }
 
+
+    void Start()
+    {
+        GameObject.Find("InputField").GetComponent<InputField>().text = CodeSaver.Code;
+    }
+
+
     void Update()
     {
         if (queue.Count > 0)
