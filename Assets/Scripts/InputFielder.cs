@@ -80,10 +80,8 @@ public class InputFielder : MonoBehaviour
 
     private void ErrorMessage(string errorMessage)
     {
-        //errorText.text = errorMessage;
         errorText.GetComponent<Text>().enabled = true;
         prevTime = 0.0f;
-        //FocusType
     }
 
 
@@ -146,7 +144,7 @@ public class InputFielder : MonoBehaviour
         }
 
         prevTime += Time.deltaTime;
-        if (prevTime >= 3.0f)
+        if (prevTime >= 5.0f)
             errorText.GetComponent<Text>().enabled = false;
     }
 }
