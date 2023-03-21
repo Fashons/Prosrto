@@ -5,26 +5,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
-    public GameObject Player;
+    //public GameObject Player;
     string programText = "";
+
+    public GameObject Menu;
 
     [SerializeField] private AudioSource GameOverSound;
 
 
     private void OnTriggerEnter(Collider collision)
     {
-        InputFielder inputFielder;
-        if (collision.gameObject.TryGetComponent<InputFielder>(out inputFielder))
+        if (gameObject.CompareTag("Wall"))
         {
-            programText = inputFielder.field.text;
-            CodeSaver.Code = programText;
+            InputFielder inputFielder;
+            if (collision.gameObject.TryGetComponent<InputFielder>(out inputFielder))
+            {
+                programText = inputFielder.field.text;
+                CodeSaver.Code = programText;
 
-            inputFielder.ClearQueue();
-            SceneManager.LoadScene("1Level");
+                inputFielder.ClearQueue();
+                //SceneManager.LoadScene("1Level");
+                Menu.SetActive(true);
 
-            inputFielder.field.text = CodeSaver.Code;
+                inputFielder.field.text = CodeSaver.Code;
 
-            //GameOverSound.Play();
+                //GameOverSound.Play();
+            }
         }
     }
 }
