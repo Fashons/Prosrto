@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public string SceneNumber;
+
+    public void MainMenu()
     {
-        
+        SceneManager.LoadScene("MainMenu");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Next()
     {
-        
+        SceneManager.LoadScene(SceneNumber);
     }
 }

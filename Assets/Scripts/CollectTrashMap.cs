@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ public class CollectTrashMap : MonoBehaviour
     public static float CollectTrash; //Считаем собранные монетки
     private float AllTrashStart; //Считаем все монетки находящиеся на уровне
     public GameObject Palka; //Привязываем слеш
+
+    public GameObject Menu;
 
     [SerializeField] private AudioSource PickUpSound;
 
@@ -37,6 +40,11 @@ public class CollectTrashMap : MonoBehaviour
             PickUpSound.Play();
             SetAllCollectableTrash();
             CurrentCollectedTrash();
+
+            if (CollectTrash == 4)
+            {
+                Menu.SetActive(true);
+            }
         }
     }
 

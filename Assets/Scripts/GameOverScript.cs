@@ -9,4 +9,9 @@ public class GameOverScript : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
