@@ -28,6 +28,8 @@ public class GameOver : MonoBehaviour
             inputFielder.field.text = CodeSaver.Code;
 
             GameOverSound.Play();
+
+        
         }
     }
 }

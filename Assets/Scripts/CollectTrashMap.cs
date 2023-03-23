@@ -43,6 +43,7 @@ public class CollectTrashMap : MonoBehaviour
 
             if (CollectTrash == 4)
             {
+                GameObject.Find("Player").SendMessage("CanMoveUpdate", false);
                 Menu.SetActive(true);
             }
         }

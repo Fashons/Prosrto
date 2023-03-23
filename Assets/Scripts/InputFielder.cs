@@ -11,6 +11,8 @@ public class InputFielder : MonoBehaviour
 
     private float prevTime = 0.0f;
 
+    private bool CanMove = true;
+
     public Text errorText;
 
     private static Queue<CommandBlock> queue = new Queue<CommandBlock>();
@@ -88,63 +90,72 @@ public class InputFielder : MonoBehaviour
     void Start()
     {
         GameObject.Find("InputField").GetComponent<InputField>().text = CodeSaver.Code;
+        CanMove = true;
+        queue.Clear();
     }
 
 
     void Update()
     {
-        if (queue.Count > 0)
-        {
-            CommandBlock queuedCommand = queue.Peek();
-
-            switch (queuedCommand.command)
+        if (CanMove == true)
+            if (queue.Count > 0)
             {
-                case "move":
-                    if (queuedCommand.currentValue < queuedCommand.limit)
-                    {
-                        var distance = Time.deltaTime * STEPSIZE;
-                        transform.Translate(Vector3.forward * distance);
-                        queuedCommand.currentValue += distance;
-                    }
-                    else
-                    {
-                        queue.Dequeue();
-                    }
-                    break;
+                CommandBlock queuedCommand = queue.Peek();
 
-                case "right":
-                    if (queuedCommand.currentValue < queuedCommand.limit)
-                    {
-                        var rotateR = Time.deltaTime / 90.0f * RotTime;
-                        transform.Rotate(Vector3.up, rotateR);
-                        queuedCommand.currentValue += rotateR;
-                    }
-                    else
-                    {
-                        queue.Dequeue();
-                    }
-                    break;
+                switch (queuedCommand.command)
+                {
+                    case "move":
+                        if (queuedCommand.currentValue < queuedCommand.limit)
+                        {
+                            var distance = Time.deltaTime * STEPSIZE;
+                            transform.Translate(Vector3.forward * distance);
+                            queuedCommand.currentValue += distance;
+                        }
+                        else
+                        {
+                            queue.Dequeue();
+                        }
+                        break;
 
-                case "left":
-                    if (queuedCommand.currentValue > queuedCommand.limit)
-                    {
-                        var rotateL = Time.deltaTime / -90.0f * RotTime;
-                        transform.Rotate(Vector3.up, rotateL);
-                        queuedCommand.currentValue += rotateL;
-                    }
-                    else
-                    {
-                        queue.Dequeue();
-                    }
-                    break;
+                    case "right":
+                        if (queuedCommand.currentValue < queuedCommand.limit)
+                        {
+                            var rotateR = Time.deltaTime / 90.0f * RotTime;
+                            transform.Rotate(Vector3.up, rotateR);
+                            queuedCommand.currentValue += rotateR;
+                        }
+                        else
+                        {
+                            queue.Dequeue();
+                        }
+                        break;
 
-                default:
-                    break;
+                    case "left":
+                        if (queuedCommand.currentValue > queuedCommand.limit)
+                        {
+                            var rotateL = Time.deltaTime / -90.0f * RotTime;
+                            transform.Rotate(Vector3.up, rotateL);
+                            queuedCommand.currentValue += rotateL;
+                        }
+                        else
+                        {
+                            queue.Dequeue();
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
             }
-        }
 
         prevTime += Time.deltaTime;
         if (prevTime >= 5.0f)
             errorText.GetComponent<Text>().enabled = false;
+    }
+
+
+    private void CanMoveUpdate(bool value)
+    {
+        CanMove = value;
     }
 }
