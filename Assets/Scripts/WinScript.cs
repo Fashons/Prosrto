@@ -15,6 +15,5 @@ public class WinScript : MonoBehaviour
     public void Next()
     {
         SceneManager.LoadScene(SceneNumber);
-        //GameObject.Find("Player").SendMessage("CanMoveUpdate", true);
     }
 }

@@ -16,6 +16,7 @@ public class CollectTrashMap : MonoBehaviour
     public GameObject Menu;
 
     [SerializeField] private AudioSource PickUpSound;
+    [SerializeField] private AudioSource WinSound;
 
 
     void Awake()
@@ -44,6 +45,7 @@ public class CollectTrashMap : MonoBehaviour
             if (CollectTrash == 4)
             {
                 GameObject.Find("Player").SendMessage("CanMoveUpdate", false);
+                WinSound.Play();
                 Menu.SetActive(true);
             }
         }

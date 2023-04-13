@@ -11,8 +11,6 @@ public class GameOver : MonoBehaviour
 
     [SerializeField] private AudioSource GameOverSound;
 
-    //private float Tagger;
-
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -20,16 +18,14 @@ public class GameOver : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent<InputFielder>(out inputFielder))
         {
+            GameOverSound.Play();
+            
             Menu.SetActive(true);
 
             programText = inputFielder.field.text;
             CodeSaver.Code = programText;
             inputFielder.ClearQueue();
-            inputFielder.field.text = CodeSaver.Code;
-
-            GameOverSound.Play();
-
-        
+            inputFielder.field.text = CodeSaver.Code;        
         }
     }
 }
