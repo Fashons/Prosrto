@@ -4,7 +4,7 @@
 #define MyAppName "ProBot"
 #define MyAppVersion "0.1"
 #define MyAppPublisher "Fash"
-#define MyAppURL "https://fashons.github.io/"
+#define MyAppURL "https://fashons.github.io"
 #define MyAppExeName "ProBot.exe"
 #define MyAppAssocName MyAppName + " File"
 #define MyAppAssocExt ".myp"
@@ -13,7 +13,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{990E4B82-8E6F-4A57-B568-028A399EA7A5}
+AppId={{53461DA6-753D-4E86-9554-5EDA43F5B3E7}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -25,8 +25,8 @@ DefaultDirName={autopf}\{#MyAppName}
 ChangesAssociations=yes
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-; Uncomment the following line to run in non administrative install mode (install for current user only.)
-;PrivilegesRequired=lowest
+; Remove the following line to run in administrative install mode (install for all users.)
+PrivilegesRequired=lowest
 OutputBaseFilename=ProBot Setup
 Compression=lzma
 SolidCompression=yes
